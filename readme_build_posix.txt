@@ -3,7 +3,7 @@ libMPSSE-SPI.dylib - https://github.com/davidgs/OS-X-LibMPSSE-SPI
 libftd2xx - http://www.ftdichip.com/Drivers/D2XX.htm
 
 On OSX you may need to set an additional environment variable on osx to find the libraries at runtime, eg.
-export DYLD_FALLBACK_LIBRARY_PATH=/user/local/lib
+export DYLD_FALLBACK_LIBRARY_PATH=/usr/local/lib
 
 You can build with:
 gcc test.c -o test -lMPSSE
