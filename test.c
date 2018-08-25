@@ -1,13 +1,16 @@
 #include <stdio.h>
 #include <stdint.h>
-#include <libMPSSE_spi.h>
+
 
 #ifdef _MSC_VER
+#include <windows.h>
 #define WAIT_A_BIT Sleep(100);
 #else
 #include <unistd.h>
 #define WAIT_A_BIT usleep(100000);
 #endif
+
+#include <libMPSSE_spi.h>
 
 int main(int argc, char **argv)
 {
@@ -15,8 +18,7 @@ int main(int argc, char **argv)
 	uint32_t totalChannelNum;
 	ChannelConfig channelConf;
 	void *devHandle = NULL;
-	uint32 channel = 0;
-
+	uint32_t channel = 0;
 
 	Init_libMPSSE();
 	status = SPI_GetNumChannels(&totalChannelNum);
@@ -51,7 +53,7 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
-	fprintf(stderr, "opened channel %d, running test...\n", channel);
+	printf("opened channel %d, running test...\n", channel);
 	while (1)
 	{
 		SPI_ToggleCS(devHandle, 1); // activate CS (low)
