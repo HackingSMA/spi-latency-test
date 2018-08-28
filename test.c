@@ -18,6 +18,8 @@ int main(int argc, char **argv)
 	uint32_t totalChannelNum;
 	ChannelConfig channelConf;
 	void *devHandle = NULL;
+	DWORD dwDriverVer;
+	DWORD dwLibraryVer;
 	uint32_t channel = 0;
 
 	Init_libMPSSE();
@@ -40,6 +42,24 @@ int main(int argc, char **argv)
 		fprintf(stderr, "SPI_OpenChannel() failed: %d\n", status);
 		return -1;
 	}
+
+	status = FT_GetDriverVersion(devHandle, &dwDriverVer);
+	if (status != FT_OK)
+	{
+		fprintf(stderr, "FT_GetDriverVersion() failed: %d\n", status);
+		return -1;
+	}
+
+	printf("Driver version = 0x%x\n", dwDriverVer);
+
+	status = FT_GetLibraryVersion(devHandle, &dwLibraryVer);
+	if (status != FT_OK)
+	{
+		fprintf(stderr, "FT_GetLibraryVersion() failed: %d\n", status);
+		return -1;
+	}
+
+	printf("Library version = 0x%x\n", dwLibraryVer);
 
 	channelConf.ClockRate = 12000000;
 	channelConf.LatencyTimer = 2;
