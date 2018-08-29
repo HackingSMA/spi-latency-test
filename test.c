@@ -52,7 +52,7 @@ int main(int argc, char **argv)
 
 	printf("Driver version = 0x%x\n", dwDriverVer);
 
-	status = FT_GetLibraryVersion(devHandle, &dwLibraryVer);
+	status = FT_GetLibraryVersion(&dwLibraryVer);
 	if (status != FT_OK)
 	{
 		fprintf(stderr, "FT_GetLibraryVersion() failed: %d\n", status);
